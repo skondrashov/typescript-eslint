@@ -105,6 +105,10 @@ export default createRule<Options, MessageIds>({
                 memberExpr.parent.range[1],
               ]),
             ],
+            loc: {
+              start: memberExpr.object.loc.end,
+              end: memberExpr.parent.loc.end,
+            },
           });
         }
       },
@@ -125,12 +129,16 @@ export default createRule<Options, MessageIds>({
               fixer.removeRange([node.range[0], node.left.range[0]]),
               fixer.removeRange([node.left.range[1], node.range[1]]),
             ],
+            loc: {
+              start: node.left.loc.end,
+              end: node.loc.end,
+            },
           });
         }
         if (
-          doesUnderlyingTypeMatchFlag(rightType, ts.TypeFlags.StringLike) &&
           node.left.type === AST_NODE_TYPES.Literal &&
-          node.left.value === ''
+          node.left.value === '' &&
+          doesUnderlyingTypeMatchFlag(rightType, ts.TypeFlags.StringLike)
         ) {
           context.report({
             node,
@@ -139,6 +147,10 @@ export default createRule<Options, MessageIds>({
               fixer.removeRange([node.range[0], node.right.range[0]]),
               fixer.removeRange([node.right.range[1], node.range[1]]),
             ],
+            loc: {
+              start: node.loc.start,
+              end: node.right.loc.start,
+            },
           });
         }
       },
@@ -152,6 +164,10 @@ export default createRule<Options, MessageIds>({
               fixer.removeRange([node.range[0], node.argument.range[0]]),
               fixer.removeRange([node.argument.range[1], node.range[1]]),
             ],
+            loc: {
+              start: node.loc.start,
+              end: node.argument.loc.start,
+            },
           });
         }
       },
@@ -167,6 +183,10 @@ export default createRule<Options, MessageIds>({
               fixer.removeRange([node.parent.range[0], node.argument.range[0]]),
               fixer.removeRange([node.argument.range[1], node.range[1]]),
             ],
+            loc: {
+              start: node.parent.loc.start,
+              end: node.argument.loc.start,
+            },
           });
         }
       },
@@ -182,6 +202,10 @@ export default createRule<Options, MessageIds>({
               fixer.removeRange([node.parent.range[0], node.argument.range[0]]),
               fixer.removeRange([node.argument.range[1], node.range[1]]),
             ],
+            loc: {
+              start: node.parent.loc.start,
+              end: node.argument.loc.start,
+            },
           });
         }
       },

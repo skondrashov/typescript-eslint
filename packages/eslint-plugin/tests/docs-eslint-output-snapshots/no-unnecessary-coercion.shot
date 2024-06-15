@@ -6,30 +6,30 @@ exports[`Validating rule docs no-unnecessary-coercion.mdx code examples ESLint o
 String('123');
 ~~~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 '123'.toString();
-      ~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+     ~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 '' + '123';
-~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 '123' + '';
-~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+     ~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 
 Number(123);
 ~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 +123;
-~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~ This conversion is unnecessary since it does not change the type of the expression.
 ~~123;
- ~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~ This conversion is unnecessary since it does not change the type of the expression.
 
 Boolean(true);
 ~~~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 !!true;
- ~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~ This conversion is unnecessary since it does not change the type of the expression.
 
 BigInt(BigInt(1));
 ~~~~~~~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 
 let str = '123';
 str += '';
-~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+   ~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
 "
 `;
 
