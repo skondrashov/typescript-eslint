@@ -46,10 +46,11 @@ export default createRule({
           }
 
           let value: number | string | undefined;
-          if (isStringLiteral(member.initializer)) {
-            value = String(member.initializer.value);
-          } else if (isNumberLiteral(member.initializer)) {
-            value = Number(member.initializer.value);
+          if (
+            isNumberLiteral(member.initializer) ||
+            isStringLiteral(member.initializer)
+          ) {
+            value = member.initializer.value;
           }
 
           if (value === undefined) {
