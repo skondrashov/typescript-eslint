@@ -4,32 +4,32 @@ exports[`Validating rule docs no-unnecessary-coercion.mdx code examples ESLint o
 "Incorrect
 
 String('123');
-~~~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~~~~~~~~~~~~ Passing a string to String() does not change the type or value of the string.
 '123'.toString();
-     ~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+     ~~~~~~~~~~~ Using .toString() on a string does not change the type or value of the string.
 '' + '123';
-~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~~~~ Concatenating '' with a string does not change the type or value of the string.
 '123' + '';
-     ~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+     ~~~~~ Concatenating a string with '' does not change the type or value of the string.
 
 Number(123);
-~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~~~~~~~~~~ Passing a number to Number() does not change the type or value of the number.
 +123;
-~ This conversion is unnecessary since it does not change the type of the expression.
+~ Using the unary + operator on a number does not change the type or value of the number.
 ~~123;
-~~ This conversion is unnecessary since it does not change the type of the expression.
+~~ Using ~~ on a number does not change the type or value of the number.
 
 Boolean(true);
-~~~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~~~~~~~~~~~~ Passing a boolean to Boolean() does not change the type or value of the boolean.
 !!true;
-~~ This conversion is unnecessary since it does not change the type of the expression.
+~~ Using !! on a boolean does not change the type or value of the boolean.
 
 BigInt(BigInt(1));
-~~~~~~~~~~~~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+~~~~~~~~~~~~~~~~~ Passing a bigint to BigInt() does not change the type or value of the bigint.
 
 let str = '123';
 str += '';
-   ~~~~~~ This conversion is unnecessary since it does not change the type of the expression.
+   ~~~~~~ Concatenating a string with '' does not change the type or value of the string.
 "
 `;
 
