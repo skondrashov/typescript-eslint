@@ -79,6 +79,7 @@ import noThisAlias from './no-this-alias';
 import noThrowLiteral from './no-throw-literal';
 import noTypeAlias from './no-type-alias';
 import noUnnecessaryBooleanLiteralCompare from './no-unnecessary-boolean-literal-compare';
+import noUnnecessaryCoercion from './no-unnecessary-coercion';
 import noUnnecessaryCondition from './no-unnecessary-condition';
 import noUnnecessaryQualifier from './no-unnecessary-qualifier';
 import noUnnecessaryTemplateExpression from './no-unnecessary-template-expression';
@@ -225,6 +226,7 @@ export default {
   'no-throw-literal': noThrowLiteral,
   'no-type-alias': noTypeAlias,
   'no-unnecessary-boolean-literal-compare': noUnnecessaryBooleanLiteralCompare,
+  'no-unnecessary-coercion': noUnnecessaryCoercion,
   'no-unnecessary-condition': noUnnecessaryCondition,
   'no-unnecessary-qualifier': noUnnecessaryQualifier,
   'no-unnecessary-template-expression': noUnnecessaryTemplateExpression,

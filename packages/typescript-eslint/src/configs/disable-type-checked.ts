@@ -31,6 +31,7 @@ export default (
     '@typescript-eslint/no-redundant-type-constituents': 'off',
     '@typescript-eslint/no-throw-literal': 'off',
     '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
+    '@typescript-eslint/no-unnecessary-coercion': 'off',
     '@typescript-eslint/no-unnecessary-condition': 'off',
     '@typescript-eslint/no-unnecessary-qualifier': 'off',
     '@typescript-eslint/no-unnecessary-template-expression': 'off',
