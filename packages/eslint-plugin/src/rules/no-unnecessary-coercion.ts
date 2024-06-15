@@ -11,20 +11,20 @@ import {
 } from '../util';
 
 type Options = [];
-type MessageIds = 'unnecessaryCoercion';
+type MessageIds = 'unnecessaryConversion';
 
 export default createRule<Options, MessageIds>({
   name: 'no-unnecessary-coercion',
   meta: {
     docs: {
       description:
-        'Disallow coercions that do not change the type of an expression',
+        'Disallow conversion idioms when they do not change the type or value of the expression',
       requiresTypeChecking: true,
     },
     fixable: 'code',
     messages: {
-      unnecessaryCoercion:
-        'This conversion is unnecessary since it does not change the type of the expression.',
+      unnecessaryConversion:
+        '{{violation}} does not change the type or value of the {{type}}.',
     },
     schema: [],
     type: 'suggestion',
@@ -77,11 +77,15 @@ export default createRule<Options, MessageIds>({
           ) {
             context.report({
               node,
-              messageId: 'unnecessaryCoercion',
+              messageId: 'unnecessaryConversion',
               fix: (fixer): RuleFix[] => [
                 fixer.removeRange([node.range[0], node.arguments[0].range[0]]),
                 fixer.removeRange([node.arguments[0].range[1], node.range[1]]),
               ],
+              data: {
+                violation: `Passing a ${node.callee.name.toLowerCase()} to ${node.callee.name}()`,
+                type: node.callee.name.toLowerCase(),
+              },
             });
           }
         }
@@ -94,7 +98,7 @@ export default createRule<Options, MessageIds>({
         if (doesUnderlyingTypeMatchFlag(type, ts.TypeFlags.StringLike)) {
           context.report({
             node,
-            messageId: 'unnecessaryCoercion',
+            messageId: 'unnecessaryConversion',
             fix: (fixer): RuleFix[] => [
               fixer.removeRange([
                 memberExpr.parent.range[0],
@@ -108,6 +112,10 @@ export default createRule<Options, MessageIds>({
             loc: {
               start: memberExpr.object.loc.end,
               end: memberExpr.parent.loc.end,
+            },
+            data: {
+              violation: 'Using .toString() on a string',
+              type: 'string',
             },
           });
         }
@@ -124,7 +132,7 @@ export default createRule<Options, MessageIds>({
         ) {
           context.report({
             node,
-            messageId: 'unnecessaryCoercion',
+            messageId: 'unnecessaryConversion',
             fix: (fixer): RuleFix[] => [
               fixer.removeRange([node.range[0], node.left.range[0]]),
               fixer.removeRange([node.left.range[1], node.range[1]]),
@@ -132,6 +140,10 @@ export default createRule<Options, MessageIds>({
             loc: {
               start: node.left.loc.end,
               end: node.loc.end,
+            },
+            data: {
+              violation: "Concatenating a string with ''",
+              type: 'string',
             },
           });
         }
@@ -142,7 +154,7 @@ export default createRule<Options, MessageIds>({
         ) {
           context.report({
             node,
-            messageId: 'unnecessaryCoercion',
+            messageId: 'unnecessaryConversion',
             fix: (fixer): RuleFix[] => [
               fixer.removeRange([node.range[0], node.right.range[0]]),
               fixer.removeRange([node.right.range[1], node.range[1]]),
@@ -150,6 +162,10 @@ export default createRule<Options, MessageIds>({
             loc: {
               start: node.loc.start,
               end: node.right.loc.start,
+            },
+            data: {
+              violation: "Concatenating '' with a string",
+              type: 'string',
             },
           });
         }
@@ -159,7 +175,7 @@ export default createRule<Options, MessageIds>({
         if (doesUnderlyingTypeMatchFlag(type, ts.TypeFlags.NumberLike)) {
           context.report({
             node,
-            messageId: 'unnecessaryCoercion',
+            messageId: 'unnecessaryConversion',
             fix: (fixer): RuleFix[] => [
               fixer.removeRange([node.range[0], node.argument.range[0]]),
               fixer.removeRange([node.argument.range[1], node.range[1]]),
@@ -167,6 +183,10 @@ export default createRule<Options, MessageIds>({
             loc: {
               start: node.loc.start,
               end: node.argument.loc.start,
+            },
+            data: {
+              violation: 'Using the unary + operator on a number',
+              type: 'number',
             },
           });
         }
@@ -178,7 +198,7 @@ export default createRule<Options, MessageIds>({
         if (doesUnderlyingTypeMatchFlag(type, ts.TypeFlags.BooleanLike)) {
           context.report({
             node,
-            messageId: 'unnecessaryCoercion',
+            messageId: 'unnecessaryConversion',
             fix: (fixer): RuleFix[] => [
               fixer.removeRange([node.parent.range[0], node.argument.range[0]]),
               fixer.removeRange([node.argument.range[1], node.range[1]]),
@@ -186,6 +206,10 @@ export default createRule<Options, MessageIds>({
             loc: {
               start: node.parent.loc.start,
               end: node.argument.loc.start,
+            },
+            data: {
+              violation: 'Using !! on a boolean',
+              type: 'boolean',
             },
           });
         }
@@ -197,7 +221,7 @@ export default createRule<Options, MessageIds>({
         if (doesUnderlyingTypeMatchFlag(type, ts.TypeFlags.NumberLike)) {
           context.report({
             node,
-            messageId: 'unnecessaryCoercion',
+            messageId: 'unnecessaryConversion',
             fix: (fixer): RuleFix[] => [
               fixer.removeRange([node.parent.range[0], node.argument.range[0]]),
               fixer.removeRange([node.argument.range[1], node.range[1]]),
@@ -205,6 +229,10 @@ export default createRule<Options, MessageIds>({
             loc: {
               start: node.parent.loc.start,
               end: node.argument.loc.start,
+            },
+            data: {
+              violation: 'Using ~~ on a number',
+              type: 'number',
             },
           });
         }
